@@ -1,0 +1,124 @@
+/*
+ * ╔══════════════════════════════════════════════════════════════════╗
+ * ║  رنگ‌های سامانه — تنها جای تعریف رنگ                               ║
+ * ╚══════════════════════════════════════════════════════════════════╝
+ *
+ * این فایل دو بخش دارد:
+ *
+ *   ۱) «پالت پایه»: رنگ‌های خام با کد هگز. برای تغییر رنگ سامانه فقط
+ *      همین کدها را عوض کنید؛ بقیه رنگ‌ها خودکار از این‌ها ساخته می‌شوند.
+ *
+ *   ۲) «نقش رنگ‌ها»: هر بخش رابط (زمینه، متن، دکمه، منو، وضعیت‌ها…) به
+ *      یکی از رنگ‌های پالت اشاره می‌کند. در صفحات فقط از این نام‌ها
+ *      استفاده می‌شود (مثل bg-primary یا text-success)، هرگز کد رنگ مستقیم.
+ *
+ * طیف‌های روشن‌تر/تیره‌تر با color-mix از همان رنگ پایه ساخته می‌شوند،
+ * پس یک رنگ همیشه یک کد دارد و همه جا یکسان است.
+ */
+
+/* ──────────────── ۱) پالت پایه ──────────────── */
+:root {
+  /* رنگ‌های لوگو (ثابت سازمان) */
+  --palette-logo-blue: #004fac;      /* آبی اصلی لوگو: دکمه‌ها، پیوندها، نشانه‌ها */
+  --palette-logo-sky: #29a4dd;       /* آبی روشن لوگو (موج): تأکیدها، فوکوس، نمودار */
+  --palette-deep-navy: #052654;      /* سرمه‌ای عمیق: نوار نشانه‌های بخش‌ها (سمت راست) */
+
+  /* خنثی‌ها (متن، زمینه، خط) */
+  --palette-ink: #0f1d33;            /* متن اصلی */
+  --palette-slate: #5b6b80;          /* متن کم‌رنگ و توضیحات */
+  --palette-mist: #f3f6f9;           /* زمینه صفحه */
+  --palette-cloud: #eaeff5;          /* زمینه بخش‌های کم‌رنگ */
+  --palette-line: #e1e7ef;           /* خطوط و حاشیه‌ها */
+  --palette-white: #ffffff;          /* کارت‌ها و پنجره‌ها */
+
+  /* رنگ‌های وضعیت */
+  --palette-green: #0e9f6e;          /* موفق / فعال */
+  --palette-amber: #f0a020;          /* در انتظار / هشدار */
+  --palette-amber-dark: #8f5300;     /* متن روی زمینه هشدار */
+  --palette-red: #d63c3c;            /* خطا / رد / قطع */
+}
+
+/* ──────────────── ۲) نقش رنگ‌ها ──────────────── */
+:root {
+  /* نام‌های برند (برای سازگاری با کدهای قبلی) */
+  --logo-blue: var(--palette-logo-blue);
+  --logo-blue-light: var(--palette-logo-sky);
+
+  /* زمینه و متن */
+  --background: var(--palette-mist);
+  --foreground: var(--palette-ink);
+  --card: var(--palette-white);
+  --card-foreground: var(--palette-ink);
+  --popover: var(--palette-white);
+  --popover-foreground: var(--palette-ink);
+  --muted: var(--palette-cloud);
+  --muted-foreground: var(--palette-slate);
+  --border: var(--palette-line);
+  --input: color-mix(in oklab, var(--palette-line) 80%, var(--palette-slate));
+  --ring: var(--palette-logo-sky);
+  --overlay: color-mix(in oklab, var(--palette-deep-navy) 55%, transparent);
+
+  /* دکمه اصلی و رنگ‌های همراه */
+  --primary: var(--palette-logo-blue);
+  --primary-hover: color-mix(in oklab, var(--palette-logo-blue) 86%, var(--palette-deep-navy));
+  --primary-foreground: var(--palette-white);
+  --primary-soft: color-mix(in oklab, var(--palette-logo-blue) 9%, var(--palette-white));
+  --secondary: color-mix(in oklab, var(--palette-logo-blue) 7%, var(--palette-white));
+  --secondary-foreground: var(--palette-logo-blue);
+  --accent: color-mix(in oklab, var(--palette-logo-sky) 13%, var(--palette-white));
+  --accent-foreground: var(--palette-logo-blue);
+  --info: var(--palette-logo-sky);
+  --info-soft: color-mix(in oklab, var(--palette-logo-sky) 15%, var(--palette-white));
+
+  /* وضعیت‌ها: رنگ اصلی + زمینه ملایم + متن روی زمینه ملایم */
+  --success: var(--palette-green);
+  --success-soft: color-mix(in oklab, var(--palette-green) 12%, var(--palette-white));
+  --success-foreground: color-mix(in oklab, var(--palette-green) 80%, var(--palette-ink));
+  --warning: var(--palette-amber);
+  --warning-soft: color-mix(in oklab, var(--palette-amber) 16%, var(--palette-white));
+  --warning-foreground: var(--palette-amber-dark);
+  --destructive: var(--palette-red);
+  --destructive-soft: color-mix(in oklab, var(--palette-red) 10%, var(--palette-white));
+  --destructive-foreground: var(--palette-white);
+
+  /* نوار نشانه‌ها (ستون باریک سرمه‌ای سمت راست) */
+  --sidebar: var(--palette-deep-navy);
+  --sidebar-foreground: color-mix(in oklab, var(--palette-white) 78%, var(--palette-logo-sky));
+  --sidebar-muted: color-mix(in oklab, var(--palette-white) 52%, var(--palette-logo-sky));
+  --sidebar-primary: var(--palette-logo-sky);
+  --sidebar-primary-foreground: var(--palette-white);
+  --sidebar-accent: color-mix(in oklab, var(--palette-white) 10%, transparent);
+  --sidebar-accent-foreground: var(--palette-white);
+  --sidebar-active: var(--palette-white);
+  --sidebar-active-foreground: var(--palette-logo-blue);
+  --sidebar-border: color-mix(in oklab, var(--palette-white) 12%, transparent);
+  --sidebar-ring: var(--palette-logo-sky);
+
+  /* ستون صفحه‌های بخش (کنار نوار نشانه‌ها) */
+  --panel: var(--palette-white);
+  --panel-foreground: var(--palette-ink);
+  --panel-border: var(--palette-line);
+  --panel-active: color-mix(in oklab, var(--palette-logo-blue) 8%, var(--palette-white));
+  --panel-active-foreground: var(--palette-logo-blue);
+
+  /* درخت‌ها (نمودار سازمانی، طبقه‌بندی کاربری): خطوط راهنمای بین سطح‌ها */
+  --tree-line: color-mix(in oklab, var(--palette-line) 70%, var(--palette-slate));
+  --tree-line-active: color-mix(in oklab, var(--palette-logo-blue) 55%, var(--palette-white));
+
+  /* نمودارها */
+  --chart-1: var(--palette-logo-blue);
+  --chart-2: var(--palette-logo-sky);
+  --chart-3: var(--palette-amber);
+  --chart-4: var(--palette-green);
+  --chart-5: var(--palette-red);
+
+  /* گرادیان‌ها */
+  --gradient-brand: linear-gradient(135deg, var(--palette-logo-blue) 0%, var(--palette-logo-sky) 100%);
+  --gradient-sidebar: linear-gradient(180deg, var(--palette-logo-blue) 0%, var(--palette-deep-navy) 100%);
+  --gradient-page: none;
+
+  /* سایه‌ها (رنگ سایه هم از پالت) — کم و دقیق؛ مرزها را خطوط می‌سازند */
+  --shadow-card: 0 1px 2px color-mix(in oklab, var(--palette-ink) 5%, transparent);
+  --shadow-raised: 0 2px 6px color-mix(in oklab, var(--palette-ink) 6%, transparent), 0 16px 36px -14px color-mix(in oklab, var(--palette-ink) 24%, transparent);
+  --shadow-brand: 0 1px 2px color-mix(in oklab, var(--palette-logo-blue) 35%, transparent), inset 0 1px 0 color-mix(in oklab, var(--palette-white) 14%, transparent);
+}

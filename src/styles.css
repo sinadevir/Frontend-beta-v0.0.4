@@ -1,0 +1,290 @@
+/*
+ * Tailwind v4 entry: config lives here, with no tailwind.config.js or PostCSS plugin.
+ * Keep every @import in this top block. Never @import a remote URL.
+ *
+ * رنگ‌ها: فقط در src/theme/colors.css تعریف می‌شوند. این فایل آن‌ها را به
+ * کلاس‌های Tailwind وصل می‌کند و ظاهر عمومی را می‌سازد؛ اینجا کد رنگ ننویسید.
+ */
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+/* Fonts are served from the app itself (npm packages), not from Google Fonts: they keep working on closed/filtered networks.
+   Estedad is the main face; Vazirmatn stays as the fallback. */
+@import "@fontsource-variable/estedad/index.css";
+@import "@fontsource-variable/vazirmatn/index.css";
+@import "./theme/colors.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 6px);
+  --radius-md: calc(var(--radius) - 4px);
+  --radius-lg: calc(var(--radius) - 2px);
+  --radius-xl: var(--radius);
+  --radius-2xl: calc(var(--radius) + 4px);
+  --radius-3xl: calc(var(--radius) + 8px);
+  --radius-4xl: calc(var(--radius) + 14px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-soft: var(--primary-soft);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-soft: var(--destructive-soft);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-overlay: var(--overlay);
+  --color-ring-offset-background: var(--background);
+  --color-logo-blue: var(--logo-blue);
+  --color-logo-blue-light: var(--logo-blue-light);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-muted: var(--sidebar-muted);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-active: var(--sidebar-active);
+  --color-sidebar-active-foreground: var(--sidebar-active-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-panel: var(--panel);
+  --color-panel-foreground: var(--panel-foreground);
+  --color-panel-border: var(--panel-border);
+  --color-panel-active: var(--panel-active);
+  --color-panel-active-foreground: var(--panel-active-foreground);
+  --color-tree-line: var(--tree-line);
+  --color-tree-line-active: var(--tree-line-active);
+
+  --shadow-card: var(--shadow-card);
+  --shadow-raised: var(--shadow-raised);
+  --shadow-brand: var(--shadow-brand);
+
+  --font-sans: "Estedad Variable", "Vazirmatn Variable", "Vazirmatn", Tahoma, "Segoe UI", system-ui, sans-serif;
+  /* No Latin monospace face: Persian digits would fall back to a random font. Codes use the main Persian face. */
+  --font-mono: "Estedad Variable", "Vazirmatn Variable", "Vazirmatn", Tahoma, "Segoe UI", system-ui, sans-serif;
+  /* Persian script needs more vertical room than Latin. */
+  --text-xs--line-height: 1.7;
+  --text-sm--line-height: 1.75;
+  --text-base--line-height: 1.8;
+  --text-lg--line-height: 1.7;
+  --text-xl--line-height: 1.6;
+  --text-2xl--line-height: 1.5;
+}
+
+:root {
+  --radius: 0.75rem;
+  /* shell sizes: icon strip + section pages column */
+  --rail-w: 5.5rem;
+  --panel-w: 16rem;
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+
+  /* The whole system reads right-to-left, even if the page's dir attribute is lost. Tables included. */
+  html, body { direction: rtl; }
+  table, thead, tbody, tfoot, tr, th, td { direction: rtl; }
+  th, td { text-align: start; }
+
+  html {
+    font-size: 15px;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--color-background);
+    background-image: var(--gradient-page);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    /* Estedad's fixed-width digits are very wide (dates read «۱۴۰۳/ ۱۲/ ۱۱»), so digits keep their natural width everywhere. */
+    font-variant-numeric: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Persian letters join each other: any letter-spacing or faux italic breaks the words apart. */
+  h1, h2, h3, h4, h5, h6 { font-weight: 700; text-wrap: balance; }
+  p, li, dd { text-wrap: pretty; }
+  i, em, cite, address { font-style: normal; }
+
+  button, input, select, textarea, optgroup { font-family: inherit; font-feature-settings: inherit; }
+  ::placeholder { font-family: inherit; opacity: 1; }
+
+  ::selection { background: color-mix(in oklab, var(--logo-blue-light) 30%, transparent); }
+
+  * { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+  :focus-visible { outline-color: var(--color-ring); }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+}
+
+/* ───────── Brand surfaces ───────── */
+@utility bg-brand { background-image: var(--gradient-brand); }
+/* kept for older markup */
+@utility bg-water { background-image: var(--gradient-brand); }
+@utility bg-sidebar-gradient { background-image: var(--gradient-sidebar); }
+/* soft frosted surface for the floating top bar */
+@utility surface-glass {
+  background: color-mix(in oklab, var(--card) 78%, transparent);
+  backdrop-filter: saturate(1.4) blur(14px);
+  -webkit-backdrop-filter: saturate(1.4) blur(14px);
+}
+/* thin wave line used as a decorative divider (drawn with the logo-sky colour) */
+@utility wave-divider {
+  height: 10px;
+  background-color: var(--logo-blue-light);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='10' viewBox='0 0 40 10'%3E%3Cpath d='M0 5 Q10 0 20 5 T40 5' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E") repeat-x center / 40px 10px;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='10' viewBox='0 0 40 10'%3E%3Cpath d='M0 5 Q10 0 20 5 T40 5' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E") repeat-x center / 40px 10px;
+}
+
+/* Sidebar category open/close: short height + fade. */
+@keyframes nav-open { from { height: 0; opacity: 0; } to { height: var(--radix-collapsible-content-height); opacity: 1; } }
+@keyframes nav-close { from { height: var(--radix-collapsible-content-height); opacity: 1; } to { height: 0; opacity: 0; } }
+.nav-collapsible { overflow: hidden; }
+.nav-collapsible[data-state="open"] { animation: nav-open 200ms ease-out; }
+.nav-collapsible[data-state="closed"] { animation: nav-close 160ms ease-in; }
+
+/* Never track Persian text. */
+*, *::before, *::after { letter-spacing: 0 !important; }
+
+.font-mono { unicode-bidi: isolate; }
+
+/* ───────── Tables ───────── */
+.data-table tbody tr:not(.dt-static) > td { transition: background-color 140ms ease, box-shadow 140ms ease; }
+.data-table tbody tr:not(.dt-static):hover > td,
+.data-table tbody tr:not(.dt-static):focus-visible > td { background: color-mix(in oklab, var(--accent) 70%, var(--card)); }
+/* brand marker on the row's start edge (right side; tables are always RTL) */
+.data-table tbody tr:not(.dt-static):hover > td:first-child,
+.data-table tbody tr:not(.dt-static):focus-visible > td:first-child { box-shadow: inset -3px 0 0 var(--logo-blue-light); }
+.data-table tbody tr[data-state="selected"] > td { background: var(--accent); }
+
+/* ───────── Page entrance ───────── */
+@keyframes rise-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.rise-in { animation: rise-in 320ms cubic-bezier(.2,.7,.2,1) both; }
+
+/* ───────── Logo loader ───────── */
+.sl-stage { position: relative; display: grid; place-items: center; width: 5.5rem; height: 5.5rem; }
+.sl-logo { width: 4.25rem; height: 4.25rem; border-radius: 9999px; object-fit: contain; background: var(--color-card); user-select: none; box-shadow: var(--shadow-card); }
+.sl-ring {
+  position: absolute; inset: 0; border-radius: 9999px;
+  border: 3px solid color-mix(in oklab, var(--logo-blue-light) 18%, transparent);
+  border-top-color: var(--logo-blue);
+  border-inline-start-color: var(--logo-blue-light);
+  animation: sl-spin 0.9s linear infinite;
+}
+.sl-sm .sl-stage { width: 3.25rem; height: 3.25rem; }
+.sl-sm .sl-logo { width: 2.5rem; height: 2.5rem; }
+.sl-content { animation: sl-fade-in 240ms ease-out both; }
+@keyframes sl-fade-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@keyframes sl-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .sl-ring { animation: none !important; } .sl-content, .rise-in { animation: none !important; } }
+
+/* ───────── Section column: pages slide in when another section is chosen ───────── */
+@keyframes panel-swap { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: none; } }
+.panel-swap { animation: panel-swap 260ms cubic-bezier(.22,1,.36,1) both; }
+@media (prefers-reduced-motion: reduce) { .panel-swap { animation: none !important; } }
+
+/* ───────── Unified form controls (inputs, selects, pickers, textareas) ───────── */
+@utility field-control {
+  min-height: 2.75rem;
+  border-radius: calc(var(--radius) - 2px);
+  border: 1px solid color-mix(in oklab, var(--input) 70%, transparent);
+  background: color-mix(in oklab, var(--muted) 55%, var(--card));
+  box-shadow: none;
+  transition: border-color 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+  &:hover { border-color: var(--input); background: var(--card); }
+  &:focus-visible, &:focus-within, &[data-state="open"] {
+    outline: none; background: var(--card); border-color: var(--ring);
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--ring) 18%, transparent);
+  }
+  &[aria-invalid="true"] {
+    border-color: var(--destructive);
+    background: color-mix(in oklab, var(--destructive) 5%, var(--card));
+  }
+}
+
+/* ───────── Create / edit dialog ───────── */
+@keyframes fd-in { from { opacity: 0; transform: translate(-50%, -46%) scale(.97); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
+@keyframes fd-out { from { opacity: 1; transform: translate(-50%, -50%) scale(1); } to { opacity: 0; transform: translate(-50%, -47%) scale(.98); } }
+.form-dialog[data-state="open"] { animation: fd-in 280ms cubic-bezier(.2,.8,.2,1) both; }
+.form-dialog[data-state="closed"] { animation: fd-out 160ms ease-in both; }
+/* ───────── Shared window surface (dialogs, confirmations) ───────── */
+@utility window-surface {
+  border-radius: calc(var(--radius) + 12px);
+  background: var(--card);
+  box-shadow: var(--shadow-raised);
+  overflow: hidden;
+  border: 1px solid color-mix(in oklab, var(--border) 60%, transparent);
+  &::before {
+    content: ""; position: absolute; inset-inline: 0; top: 0; height: 4px;
+    background-image: var(--gradient-brand);
+  }
+}
+
+/* ───────── Tree rows: newly shown branches fade in ───────── */
+@keyframes tree-row-in { from { opacity: 0; transform: translateY(-3px); } to { opacity: 1; transform: none; } }
+.tree-row-in { animation: tree-row-in 180ms cubic-bezier(.2,.7,.2,1) both; }
+@media (prefers-reduced-motion: reduce) { .tree-row-in { animation: none !important; } }
+
+/* ───────── Report charts: bars grow in once when a report is generated ───────── */
+@keyframes report-grow-x { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes report-grow-y { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+.report-bar { transform-origin: right; animation: report-grow-x 600ms cubic-bezier(.22,1,.36,1) both; }
+.report-col { transform-origin: bottom; animation: report-grow-y 520ms cubic-bezier(.22,1,.36,1) both; }
+.report-ring { transition: stroke-dasharray 600ms cubic-bezier(.22,1,.36,1); }
+@media (prefers-reduced-motion: reduce) { .report-bar, .report-col { animation: none !important; } }
+/* Printing a report (also «ذخیره PDF»): only the report itself goes on paper. */
+@media print {
+  @page { margin: 12mm; }
+  body { background: var(--card) !important; }
+  .report-print { break-inside: auto; }
+  .report-print section { break-inside: avoid; box-shadow: none !important; }
+  [data-sonner-toaster], .rise-in { animation: none !important; }
+  [data-sonner-toaster] { display: none !important; }
+}
+
+/* ───────── Typed dates ─────────
+   Year/month/day keep their typed order while a trailing «/» is still alone (it would otherwise jump to the far side);
+   alignment stays on the right because `direction` is still rtl. */
+.date-typing { unicode-bidi: plaintext; text-align: start; }
+.date-typing::placeholder { unicode-bidi: plaintext; }
+
+/* ───────── Buttons while a request is running (`<Button loading>`) ─────────
+   The button's own icon gives way to a spinner and a thin running bar sweeps along its lower edge. */
+[data-loading] > svg:not(.btn-spinner) { display: none; }
+.btn-progress { position: absolute; inset-inline: 0; bottom: 0; height: 3px; overflow: hidden; pointer-events: none; background: color-mix(in oklab, currentColor 18%, transparent); }
+.btn-progress::before { content: ""; position: absolute; inset-block: 0; width: 40%; border-radius: 999px; background: currentColor; opacity: .7; animation: btn-progress 1.1s ease-in-out infinite; }
+@keyframes btn-progress { from { inset-inline-start: -40%; } to { inset-inline-start: 100%; } }
+@media (prefers-reduced-motion: reduce) { .btn-progress::before { animation-duration: 2.4s; } }
